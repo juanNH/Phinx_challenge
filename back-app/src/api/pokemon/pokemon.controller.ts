@@ -8,24 +8,24 @@ import { ApiOperation, ApiResponse, ApiTags, getSchemaPath } from '@nestjs/swagg
 import { ApiErrorDecorator } from 'src/commons/decorator/error.decorator';
 import { PokemonListDto } from './dto/pokemon-list.dto';
 
-@Controller('pokemon')
+@Controller({ path: 'pokemon', version: '1' })
 @ApiTags('pokemon')
 export class PokemonController {
-  constructor(private readonly pokemonService: PokemonService) {}
+  constructor(private readonly pokemonService: PokemonService) { }
 
   /**
    * Controller to get pokemon list and count.
    * @returns {PokemonListDto}  List and count of pokemons.
    */
   @Get()
-  @ApiOperation({summary: 'Obtains list of pokemons.'})
+  @ApiOperation({ summary: 'Obtains list of pokemons.' })
   @ApiResponse({
-    status:200,
+    status: 200,
     description: 'Pokemon list.',
-    schema:{
+    schema: {
       $ref: getSchemaPath(PokemonListDto)
     },
-    type:PokemonListDto,
+    type: PokemonListDto,
   })
   @ApiErrorDecorator(HttpStatus.INTERNAL_SERVER_ERROR, 'Internal Server')
   findAll() {
