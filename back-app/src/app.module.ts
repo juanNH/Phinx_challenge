@@ -5,6 +5,7 @@ import { Pokemon } from './api/pokemon/entities/pokemon.entity';
 import { Battle } from './api/battle/entities/battle.entity';
 import { Turn } from './api/battle/entities/turn.entity';
 import { TurnPokemon } from './api/battle/entities/turnPokemon.entity';
+import { BattleModule } from './api/battle/battle.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { TurnPokemon } from './api/battle/entities/turnPokemon.entity';
       synchronize: true,
     }),
     PokemonModule,
+    BattleModule,
   ],
 })
 export class AppModule {}
