@@ -4,7 +4,7 @@
 
 Ante todo cualquier duda estoy atento en mi mail: juannicolash01@gmail.com
 
-Usar la rama main
+Usar la rama master
 
 La app corre en el puerto 3000
 
