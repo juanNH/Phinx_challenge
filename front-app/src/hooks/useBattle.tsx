@@ -1,15 +1,23 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Pokemon } from '../types/pokemon.interface'
-import { Nullable } from '../types/commons.interface'
+import { DataState, Nullable } from '../types/commons.interface'
 import { postBattle } from '../services/battle/post.battle.service'
 import { getRandomInteger } from '../helpers'
+import { getBattles } from '../services/battle/get.battles.service'
+import { Battle } from '../types/battle.interface'
 
 
 /**
  * Hook for battle.
  * @returns Methods and data.
  */
-export const useBattle = () => {
+export const useBattle = (renderCall: boolean = true) => {
+    const controller = useRef<AbortController>(new AbortController());
+    const [battles, setBattles] = useState<DataState<Battle[]>>({
+        isError:false,
+        isLoading:true,
+        data:[],
+    })
     const [pokemonsBattle, setPokemonsBattle] = useState<IPokemonBattle>({
         pokemon1: null,
         pokemon2: null,
@@ -124,8 +132,41 @@ export const useBattle = () => {
                 isError: true,
             })
         }
-
     }
+
+    /**
+     * Fetch list of battles
+     */
+    const handleBattlesFetch = async () => {
+        try {
+            setBattles({
+                ...battles,
+                isLoading: true,
+            })
+            const battlesResponse = await getBattles({ version: 1, signal: controller.current.signal });
+            setBattles({
+                data: battlesResponse.data.battles ?? [],
+                isLoading: false,
+                isError: true,
+            })
+        } catch (err) {
+            console.error(err)
+            setBattles({
+                data: [],
+                isLoading: false,
+                isError: true,
+            })
+        }
+    }
+
+    useEffect(() => {
+        if (renderCall) {
+            handleBattlesFetch();
+        }
+        return () => {
+            controller.current.abort();
+        }
+    }, []);
 
     return {
         pokemonsBattle,
@@ -133,8 +174,12 @@ export const useBattle = () => {
         handleRemovePokemon,
         handleBattle,
         randomBattleSelectPokemon,
+        battles,
     }
 }
+
+
+
 
 
 interface IPokemonBattle {

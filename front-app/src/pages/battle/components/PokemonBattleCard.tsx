@@ -1,6 +1,7 @@
 import { Box, Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/material'
 import { Pokemon } from '../../../types/pokemon.interface'
 import { Nullable } from '../../../types/commons.interface';
+import PowerBar from './PowerBar';
 
 interface Props {
     pokemon: Nullable<Pokemon>;
@@ -27,10 +28,10 @@ export const PokemonBattleCard = ({ pokemon, handleRemovePokemon }: Props) => {
                         {pokemon.name}
                     </Typography>
                     <Box sx={{ textAlign: 'center' }}>
-                        <Typography>Attack: {pokemon.attack}</Typography>
-                        <Typography>Defence: {pokemon.defense}</Typography>
-                        <Typography>Speed: {pokemon.speed}</Typography>
-                        <Typography>Hp: {pokemon.hp}</Typography>
+                        <PowerBar value={pokemon.attack} title={'Attack:'} />
+                        <PowerBar value={pokemon.defense} title={'Defence:'} />
+                        <PowerBar value={pokemon.speed} title={'Speed:'} />
+                        <PowerBar value={pokemon.hp} title={'Hp:'} />
                     </Box>
                 </CardContent>
             </CardActionArea>

@@ -1,5 +1,5 @@
 import { Pokemon } from "./pokemon.interface";
-import { Turn } from "./Turn.interface";
+import { Turn } from "./turn.interface";
 
 export interface Battle {
     id:             string;
