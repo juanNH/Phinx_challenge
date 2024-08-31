@@ -6,9 +6,10 @@ import { Pokemon } from "../types/pokemon.interface";
 
 /**
  * Hook for pokemons.
+ * @param renderCall boolean to check if renderCall, default truel.
  * @returns methods and data.
  */
-export const usePokemons = () => {
+export const usePokemons = (renderCall: boolean = true) => {
     const controller = useRef<AbortController>(new AbortController());
     const [selectedPokemons, setSelectedPokemons] = useState<Pokemon[]>([])
     const [pokemons, setPokemons] = useState<DataState<Pokemon[]>>({
@@ -60,7 +61,9 @@ export const usePokemons = () => {
         }
     }
     useEffect(() => {
-        handlePokemonFetch()
+        if (renderCall) {
+            handlePokemonFetch()
+        }
         return () => {
             controller.current.abort();
         }

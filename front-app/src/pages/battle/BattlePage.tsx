@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material"
+import { Typography } from "@mui/material"
 import { useBattle, usePokemons } from "../../hooks";
 import { ListPokemonsBattle } from "./components/ListPokemonsBattle";
 import { PokemonBattle } from "./components/PokemonBattle";
@@ -18,9 +18,9 @@ export const BattlePage = () => {
         handleRemovePokemon,
         handleBattle,
         randomBattleSelectPokemon,
-    } = useBattle();
+    } = useBattle(false);
     return (
-        <Box component="main" sx={{ padding: { sx: '0', md: '0 10rem', lg: '0 20rem' } }}>
+        <>
             <Typography variant="h1" sx={{ fontSize: '2.5rem', margin: '1rem 0' }}>Battle of Pokemon</Typography>
             <Typography variant="h2" sx={{ fontSize: '1.8rem' }}>Select your pokemon</Typography>
             <ListPokemonsBattle
@@ -43,6 +43,6 @@ export const BattlePage = () => {
                 handleBattle={handleBattle}
                 isLoadingBattle={pokemonsBattle.isLoading}
             />
-        </Box>
+        </>
     )
 }

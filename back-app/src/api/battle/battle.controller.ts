@@ -53,9 +53,4 @@ export class BattleController {
     return this.battleService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.battleService.findOne(+id);
-  }
-
 }

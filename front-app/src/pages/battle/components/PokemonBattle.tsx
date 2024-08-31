@@ -15,7 +15,7 @@ export const PokemonBattle = ({ pokemon1, pokemon2, handleRemovePokemon, handleB
         return <></>
     }
     return (
-        <Grid container spacing={3} component="article">
+        <Grid container spacing={3} component="article" sx={{ padding: '2rem 0' }}>
             <Grid size={{ xs: 5, md: 5, lg: 5 }}>
                 <PokemonBattleCard pokemon={pokemon1} handleRemovePokemon={handleRemovePokemon} />
             </Grid>

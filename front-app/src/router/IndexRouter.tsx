@@ -1,16 +1,22 @@
-import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { BattlePage } from '../pages/battle/BattlePage';
+import { Layout } from '../pages/Layout';
+import { HomePage } from '../pages/HomePage';
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello world!<Outlet/></div>,
-    errorElement: <>404</>,
-    children:[
+    element: <Layout />,
+    errorElement: <>404 not found page</>,
+    children: [
       {
-        path:"battle",
-        element:<BattlePage />
+        path: "",
+        element: <HomePage />
+      },
+      {
+        path: "battle",
+        element: <BattlePage />
       }
     ]
   },

@@ -16,7 +16,7 @@ export const ListPokemonsBattle = ({ pokemons, handleChangePokemon, selectedPoke
                 <Card
                     key={pokemon.id}
                     component={Grid}
-                    size={{ xs: 6, md: 4, lg: 2.4 }}
+                    size={{ xs: 12, md: 4, lg: 2.4 }}
                     onClick={() => handleChangePokemon(pokemon)}
                     elevation={selectedPokemonsIds.includes(pokemon.id) ? 21 : 3}
                     aria-label={pokemon.name}
